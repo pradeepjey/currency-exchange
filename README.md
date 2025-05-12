@@ -35,6 +35,20 @@ git clone https://github.com/your-username/your-angular-app.git
 cd currency-exchange
 ```
 
+
+## Create Environments
+
+```
+1. Create environment folder under src/
+ - src/environments/
+    ├── environment.ts         # Development (default)
+    └── environment.prod.ts 
+2. Add following keys
+      - production: false, (true for environment.prod.ts)
+      - apiBaseUrl: '', // Follow update environment variables section to create
+      - fastForexKey:  '' // Follow update environment variables section to create
+```
+
 ## Update Environment variables
 
 ```text
