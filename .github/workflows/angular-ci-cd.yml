@@ -1,0 +1,69 @@
+name: Angular CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  AWS_REGION: 'us-east-1'  # Change to your AWS region
+  S3_BUCKET: 's3-bucket-name'  # Replace with your bucket name
+  APP_VERSION: ${{ github.sha }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run unit tests
+      run: npm test -- --watch=false --browsers=ChromeHeadless
+      
+    - name: Run e2e tests
+      run: npm run e2e
+      env:
+        CI: true
+
+  build-and-deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build Angular app
+      run: npm run build -- --configuration=production
+      
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+        
+    - name: Deploy to S3
+      run: |
+        aws s3 sync dist/currency-exchange s3://${{ env.S3_BUCKET }} \
+          --delete \
+          --cache-control "max-age=31536000" \
+          --acl public-read
