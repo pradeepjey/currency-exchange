@@ -1,0 +1,11 @@
+<div class="text-search">
+  <mat-form-field class="example-form-field">
+    <mat-label>{{ label() }}</mat-label>
+    <input matInput type="text" [formControl]="searchText" (keyup)="onKeyup()">
+    @if (searchText.value) {
+      <button mat-mini-fab matSuffix class="transparent-button" aria-label="Clear" (click)="clearSearch()">
+        <mat-icon>close</mat-icon>
+      </button>
+    }
+  </mat-form-field>
+</div>

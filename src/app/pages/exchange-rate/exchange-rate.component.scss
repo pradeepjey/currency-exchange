@@ -1,0 +1,17 @@
+.exchange-rate {
+  .container {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    .grid-layout {
+      width: 100%;
+      display: block;
+    }
+  }
+  .table-container {
+    overflow: scroll;
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 180px);
+  }
+}

@@ -1,0 +1,11 @@
+.trends {
+  .toggle-block {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0px 40px;
+  }
+  .chart-block {
+    width: 100%;
+    height: calc(100vh - 150px);
+  }
+}

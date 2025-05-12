@@ -1,0 +1,14 @@
+<div class="currency-filter">
+  <mat-form-field>
+    <mat-label>{{label()}}</mat-label>
+    <mat-select [formControl]="selectedCurrency()" (selectionChange)="onSelectionChange($event)">
+      @if (isClearRequired()) {
+        <mat-option value="clear">Clear</mat-option>
+      }
+      
+      @for (option of currencies(); track option.key) {
+        <mat-option value={{option.key}}>{{`${option.value}(${option.key})`}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>
