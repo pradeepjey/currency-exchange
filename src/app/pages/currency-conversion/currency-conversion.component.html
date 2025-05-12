@@ -1,0 +1,31 @@
+<div class="currency-conversion">
+  <div class="form-container">
+    <form [formGroup]="currencyForm" (ngSubmit)="onSubmit()">
+      <mat-grid-list cols="1" rowHeight="80px">
+        <mat-grid-tile
+          [colspan]="1"
+          [rowspan]="1">
+          <app-currencies-dropdown [label]="'From Currency'" [currencies]="currencies()" [selectedCurrency]="fromCurrencyControl"></app-currencies-dropdown>
+        </mat-grid-tile>
+        <mat-grid-tile
+          [colspan]="1"
+          [rowspan]="1">
+          <app-currencies-dropdown [label]="'To Currency'" [currencies]="currencies()" [selectedCurrency]="toCurrencyControl"></app-currencies-dropdown>
+        </mat-grid-tile>
+        <mat-grid-tile
+          [colspan]="1"
+          [rowspan]="1">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Amount</mat-label>
+              <input matInput formControlName="amount" type="number" />
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile
+          [colspan]="1"
+          [rowspan]="1">
+            <button mat-raised-button type="submit" [disabled]="currencyForm.invalid">Submit</button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </div>
+</div>

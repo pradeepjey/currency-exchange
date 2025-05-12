@@ -1,0 +1,25 @@
+<div class="trends">
+  <mat-grid-list cols="5" rowHeight="60px">
+    @for (control of currencyControls; track control; let  i = $index) { 
+      <mat-grid-tile
+      [colspan]="1"
+      [rowspan]="1">
+        <app-currencies-dropdown [selectedCurrency]="control" [label]="'Select Currency'" [currencies]="currencies()" (currencyChanged)="updateChart($event, i + 1)"></app-currencies-dropdown>
+      </mat-grid-tile>
+    }
+    <mat-grid-tile
+      [colspan]="2"
+      [rowspan]="1">
+      <div class="toggle-block">
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style" (change)="toggleView($event)" [(value)]="daysCount">
+          <mat-button-toggle value="14">All</mat-button-toggle>
+          <mat-button-toggle value="3">3 days</mat-button-toggle>
+          <mat-button-toggle value="7">7 days</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <div class="chart-block">
+    <app-line-chart [index]="index()" [label]="label()" [data]="data()" [chartViewUpdate]="daysCount"></app-line-chart>
+  </div>
+</div>

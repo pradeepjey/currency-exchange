@@ -1,0 +1,18 @@
+
+<app-header
+  [pageTitle]="'Currency Exchange'"
+  (toggleSidenav)="sidenav.toggle()"
+></app-header>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" class="sidenav" opened>
+    <app-navbar></app-navbar>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="content-with-toolbar">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

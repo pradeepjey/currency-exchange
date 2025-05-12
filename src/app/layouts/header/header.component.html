@@ -1,0 +1,12 @@
+<mat-toolbar color="primary" class="header-toolbar">
+  <!-- Sidenav Toggle -->
+  <button mat-icon-button (click)="toggleSidenav.emit()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <!-- Page Title -->
+  <span class="page-title">{{ pageTitle }}</span>
+  <span class="spacer"></span>
+
+  <app-theme-switch></app-theme-switch>
+</mat-toolbar>
